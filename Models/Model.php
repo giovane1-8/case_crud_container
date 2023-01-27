@@ -29,7 +29,8 @@ class Model
         } catch (\PDOException $e) {
         }
     }
-    function getAllContainers(){
+    function getAllContainers()
+    {
         $stmt = $this->PDO->query("SELECT * FROM tb_container INNER JOIN tb_cliente on tb_cliente.id_cliente = tb_container.id_cliente ");
         return $stmt->fetchAll();
     }

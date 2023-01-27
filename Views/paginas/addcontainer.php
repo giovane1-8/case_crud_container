@@ -64,13 +64,12 @@
     window.addEventListener("load", function() {
         async function verificaContainer() {
             cn1 = document.getElementById("cn1").value;
-            cn2 = document.getElementById("cn2").value;
-
+            cn2 = parseInt(document.getElementById("cn2").value);
 
 
             if ((cn1 != '') && (cn2 != '')) {
 
-               
+
                 var jqxhr = $.ajax("http://localhost/addcontainer/verificacontainer", {
                         method: "POST",
                         data: {
@@ -81,10 +80,15 @@
 
                     .done(function(msg) {
                         msg = JSON.parse(msg)
+                        console.log(msg)
                         if (msg.length > 0) {
                             alert("Ja existe um container com esse numero");
                             $("input[type=submit]").addClass("disabled");
-                        }else{
+                            $("form").attr("action", "")
+
+                        } else {
+                            $("form").attr("action", "<?php echo VENDOR_PATH ?>editcontainer/saveedit/<?php echo $this->dados[0]["cd_container"] ?>")
+
                             $("input[type=submit]").removeClass("disabled");
                         }
                     })
